@@ -69,257 +69,260 @@ export class Words {
    * =====================================================
    */
 
-  readonly words: ReadingWord[] = [
-    /*
-     * =====================================================
-     * EASY
-     * CH / GH / GN / GLI
-     * =====================================================
-     */
+readonly words: ReadingWord[] = [
 
-    {
-      word: 'CHIAVE',
-      syllables: ['CHIA', 'VE'],
-      difficulty: 'easy',
-    },
-    {
-      word: 'CHIESA',
-      syllables: ['CHIE', 'SA'],
-      difficulty: 'easy',
-    },
-    {
-      word: 'CHIODO',
-      syllables: ['CHIO', 'DO'],
-      difficulty: 'easy',
-    },
-    {
-      word: 'GHIRO',
-      syllables: ['GHI', 'RO'],
-      difficulty: 'easy',
-    },
-    {
-      word: 'GHIANDA',
-      syllables: ['GHIAN', 'DA'],
-      difficulty: 'easy',
-    },
-    {
-      word: 'GHIAIA',
-      syllables: ['GHIA', 'IA'],
-      difficulty: 'easy',
-    },
-    {
-      word: 'GHIACCIO',
-      syllables: ['GHIAC', 'CIO'],
-      difficulty: 'easy',
-    },
-    {
-      word: 'BAGNO',
-      syllables: ['BA', 'GNO'],
-      difficulty: 'easy',
-    },
-    {
-      word: 'RAGNO',
-      syllables: ['RA', 'GNO'],
-      difficulty: 'easy',
-    },
-    {
-      word: 'GNOMO',
-      syllables: ['GNO', 'MO'],
-      difficulty: 'easy',
-    },
-    {
-      word: 'FOGLIA',
-      syllables: ['FO', 'GLIA'],
-      difficulty: 'easy',
-    },
-    {
-      word: 'MAGLIA',
-      syllables: ['MA', 'GLIA'],
-      difficulty: 'easy',
-    },
-    {
-      word: 'PAGLIA',
-      syllables: ['PA', 'GLIA'],
-      difficulty: 'easy',
-    },
-    {
-      word: 'SVEGLIA',
-      syllables: ['SVE', 'GLIA'],
-      difficulty: 'easy',
-    },
-    {
-      word: 'CONIGLIO',
-      syllables: ['CO', 'NI', 'GLIO'],
-      difficulty: 'easy',
-    },
+  /*
+   * =====================================================
+   * EASY
+   * Parole complesse
+   * =====================================================
+   */
 
-    /*
-     * =====================================================
-     * MEDIUM
-     * SCI / SCE / SCH / QU / CQU / DOPPIE
-     * =====================================================
-     */
+  {
+    word: 'MERAVIGLIOSO',
+    syllables: ['ME', 'RA', 'VI', 'GLIO', 'SO'],
+    difficulty: 'easy',
+  },
+  {
+    word: 'SOPRATTUTTO',
+    syllables: ['SO', 'PRAT', 'TUT', 'TO'],
+    difficulty: 'easy',
+  },
+  {
+    word: 'INSEGNANTE',
+    syllables: ['IN', 'SE', 'GNAN', 'TE'],
+    difficulty: 'easy',
+  },
+  {
+    word: 'RAGGIUNGERE',
+    syllables: ['RAG', 'GIUN', 'GE', 'RE'],
+    difficulty: 'easy',
+  },
+  {
+    word: 'SVEGLIARSI',
+    syllables: ['SVE', 'GLIAR', 'SI'],
+    difficulty: 'easy',
+  },
+  {
+    word: 'ASCIUGAMANO',
+    syllables: ['A', 'SCIU', 'GA', 'MA', 'NO'],
+    difficulty: 'easy',
+  },
+  {
+    word: 'GHIACCIAIO',
+    syllables: ['GHIAC', 'CIA', 'IO'],
+    difficulty: 'easy',
+  },
+  {
+    word: 'CONCHIGLIE',
+    syllables: ['CON', 'CHI', 'GLIE'],
+    difficulty: 'easy',
+  },
+  {
+    word: 'ACQUAZZONE',
+    syllables: ['AC', 'QUAZ', 'ZO', 'NE'],
+    difficulty: 'easy',
+  },
+  {
+    word: 'SCIOCCHEZZA',
+    syllables: ['SCIOC', 'CHEZ', 'ZA'],
+    difficulty: 'easy',
+  },
+  {
+    word: 'APPARECCHIARE',
+    syllables: ['AP', 'PA', 'REC', 'CHIA', 'RE'],
+    difficulty: 'easy',
+  },
+  {
+    word: 'SCIVOLARE',
+    syllables: ['SCI', 'VO', 'LA', 'RE'],
+    difficulty: 'easy',
+  },
+  {
+    word: 'PASSEGGIATA',
+    syllables: ['PAS', 'SEG', 'GIA', 'TA'],
+    difficulty: 'easy',
+  },
+  {
+    word: 'ABBIGLIAMENTO',
+    syllables: ['AB', 'BI', 'GLIA', 'MEN', 'TO'],
+    difficulty: 'easy',
+  },
+  {
+    word: 'PARRUCCHIERE',
+    syllables: ['PAR', 'RUC', 'CHIE', 'RE'],
+    difficulty: 'easy',
+  },
 
-    {
-      word: 'SCIARPA',
-      syllables: ['SCIAR', 'PA'],
-      difficulty: 'medium',
-    },
-    {
-      word: 'SCIMMIA',
-      syllables: ['SCIM', 'MIA'],
-      difficulty: 'medium',
-    },
-    {
-      word: 'SCIENZA',
-      syllables: ['SCIEN', 'ZA'],
-      difficulty: 'medium',
-    },
-    {
-      word: 'SCERIFFO',
-      syllables: ['SCE', 'RIF', 'FO'],
-      difficulty: 'medium',
-    },
-    {
-      word: 'SCHIENA',
-      syllables: ['SCHIE', 'NA'],
-      difficulty: 'medium',
-    },
-    {
-      word: 'SCHIUMA',
-      syllables: ['SCHIU', 'MA'],
-      difficulty: 'medium',
-    },
-    {
-      word: 'SCHERZO',
-      syllables: ['SCHER', 'ZO'],
-      difficulty: 'medium',
-    },
-    {
-      word: 'SCHEDA',
-      syllables: ['SCHE', 'DA'],
-      difficulty: 'medium',
-    },
-    {
-      word: 'QUADRO',
-      syllables: ['QUA', 'DRO'],
-      difficulty: 'medium',
-    },
-    {
-      word: 'QUINDICI',
-      syllables: ['QUIN', 'DI', 'CI'],
-      difficulty: 'medium',
-    },
-    {
-      word: 'ACQUA',
-      syllables: ['AC', 'QUA'],
-      difficulty: 'medium',
-    },
-    {
-      word: 'ACQUARIO',
-      syllables: ['AC', 'QUA', 'RIO'],
-      difficulty: 'medium',
-    },
-    {
-      word: 'ACQUOLINA',
-      syllables: ['AC', 'QUO', 'LI', 'NA'],
-      difficulty: 'medium',
-    },
-    {
-      word: 'CAVALLO',
-      syllables: ['CA', 'VAL', 'LO'],
-      difficulty: 'medium',
-    },
-    {
-      word: 'OMBRELLO',
-      syllables: ['OM', 'BREL', 'LO'],
-      difficulty: 'medium',
-    },
 
-    /*
-     * =====================================================
-     * HARD
-     * PIÙ DIFFICOLTÀ NELLA STESSA PAROLA
-     * =====================================================
-     */
+  /*
+   * =====================================================
+   * MEDIUM
+   * Parole lunghe
+   * =====================================================
+   */
 
-    {
-      word: 'CONCHIGLIA',
-      syllables: ['CON', 'CHI', 'GLIA'],
-      difficulty: 'hard',
-    },
-    {
-      word: 'CUCCHIAIO',
-      syllables: ['CUC', 'CHIA', 'IO'],
-      difficulty: 'hard',
-    },
-    {
-      word: 'BOTTIGLIA',
-      syllables: ['BOT', 'TI', 'GLIA'],
-      difficulty: 'hard',
-    },
-    {
-      word: 'TOVAGLIA',
-      syllables: ['TO', 'VA', 'GLIA'],
-      difficulty: 'hard',
-    },
-    {
-      word: 'GHIACCIATO',
-      syllables: ['GHIAC', 'CIA', 'TO'],
-      difficulty: 'hard',
-    },
-    {
-      word: 'GHIACCIOLI',
-      syllables: ['GHIAC', 'CIO', 'LI'],
-      difficulty: 'hard',
-    },
-    {
-      word: 'ACQUAZZONE',
-      syllables: ['AC', 'QUAZ', 'ZO', 'NE'],
-      difficulty: 'hard',
-    },
-    {
-      word: 'ASCIUGAMANO',
-      syllables: ['A', 'SCIU', 'GA', 'MA', 'NO'],
-      difficulty: 'hard',
-    },
-    {
-      word: 'SCIOGLIERE',
-      syllables: ['SCIO', 'GLIE', 'RE'],
-      difficulty: 'hard',
-    },
-    {
-      word: 'SCEGLIERE',
-      syllables: ['SCE', 'GLIE', 'RE'],
-      difficulty: 'hard',
-    },
-    {
-      word: 'BICICLETTA',
-      syllables: ['BI', 'CI', 'CLET', 'TA'],
-      difficulty: 'hard',
-    },
-    {
-      word: 'PRINCIPESSA',
-      syllables: ['PRIN', 'CI', 'PES', 'SA'],
-      difficulty: 'hard',
-    },
-    {
-      word: 'PASTICCERIA',
-      syllables: ['PA', 'STIC', 'CE', 'RIA'],
-      difficulty: 'hard',
-    },
-    {
-      word: 'CROSTICINA',
-      syllables: ['CRO', 'STI', 'CI', 'NA'],
-      difficulty: 'hard',
-    },
-    {
-      word: 'STRACCIATELLA',
-      syllables: ['STRAC', 'CIA', 'TEL', 'LA'],
-      difficulty: 'hard',
-    },
-  ];
+  {
+    word: 'STRAORDINARIO',
+    syllables: ['STRA', 'OR', 'DI', 'NA', 'RIO'],
+    difficulty: 'medium',
+  },
+  {
+    word: 'IMPROVVISAMENTE',
+    syllables: ['IM', 'PROV', 'VI', 'SA', 'MEN', 'TE'],
+    difficulty: 'medium',
+  },
+  {
+    word: 'APPARECCHIATURA',
+    syllables: ['AP', 'PA', 'REC', 'CHIA', 'TU', 'RA'],
+    difficulty: 'medium',
+  },
+  {
+    word: 'SCENEGGIATURA',
+    syllables: ['SCE', 'NEG', 'GIA', 'TU', 'RA'],
+    difficulty: 'medium',
+  },
+  {
+    word: 'SCIOGLIMENTO',
+    syllables: ['SCIO', 'GLI', 'MEN', 'TO'],
+    difficulty: 'medium',
+  },
+  {
+    word: 'RAGGRUPPAMENTO',
+    syllables: ['RAG', 'GRUP', 'PA', 'MEN', 'TO'],
+    difficulty: 'medium',
+  },
+  {
+    word: 'ORGANIZZAZIONE',
+    syllables: ['OR', 'GA', 'NIZ', 'ZA', 'ZIO', 'NE'],
+    difficulty: 'medium',
+  },
+  {
+    word: 'COMUNICAZIONE',
+    syllables: ['CO', 'MU', 'NI', 'CA', 'ZIO', 'NE'],
+    difficulty: 'medium',
+  },
+  {
+    word: 'PREOCCUPAZIONE',
+    syllables: ['PRE', 'OC', 'CU', 'PA', 'ZIO', 'NE'],
+    difficulty: 'medium',
+  },
+  {
+    word: 'RACCOMANDAZIONE',
+    syllables: ['RAC', 'CO', 'MAN', 'DA', 'ZIO', 'NE'],
+    difficulty: 'medium',
+  },
+  {
+    word: 'INQUINAMENTO',
+    syllables: ['IN', 'QUI', 'NA', 'MEN', 'TO'],
+    difficulty: 'medium',
+  },
+  {
+    word: 'ACCOMPAGNAMENTO',
+    syllables: ['AC', 'COM', 'PA', 'GNA', 'MEN', 'TO'],
+    difficulty: 'medium',
+  },
+  {
+    word: 'RICONOSCIMENTO',
+    syllables: ['RI', 'CO', 'NO', 'SCI', 'MEN', 'TO'],
+    difficulty: 'medium',
+  },
+  {
+    word: 'RISCALDAMENTO',
+    syllables: ['RI', 'SCAL', 'DA', 'MEN', 'TO'],
+    difficulty: 'medium',
+  },
+  {
+    word: 'RISTRUTTURAZIONE',
+    syllables: ['RI', 'STRUT', 'TU', 'RA', 'ZIO', 'NE'],
+    difficulty: 'medium',
+  },
 
+
+  /*
+   * =====================================================
+   * HARD
+   * Super parole
+   * =====================================================
+   */
+
+  {
+    word: 'INCOMPRENSIBILE',
+    syllables: ['IN', 'COM', 'PREN', 'SI', 'BI', 'LE'],
+    difficulty: 'hard',
+  },
+  {
+    word: 'IMPROVVISAZIONE',
+    syllables: ['IM', 'PROV', 'VI', 'SA', 'ZIO', 'NE'],
+    difficulty: 'hard',
+  },
+  {
+    word: 'RESPONSABILITÀ',
+    syllables: ['RE', 'SPON', 'SA', 'BI', 'LI', 'TÀ'],
+    difficulty: 'hard',
+  },
+  {
+    word: 'CARATTERISTICA',
+    syllables: ['CA', 'RAT', 'TE', 'RI', 'STI', 'CA'],
+    difficulty: 'hard',
+  },
+  {
+    word: 'INDIMENTICABILE',
+    syllables: ['IN', 'DI', 'MEN', 'TI', 'CA', 'BI', 'LE'],
+    difficulty: 'hard',
+  },
+  {
+    word: 'IRRICONOSCIBILE',
+    syllables: ['IR', 'RI', 'CO', 'NO', 'SCI', 'BI', 'LE'],
+    difficulty: 'hard',
+  },
+  {
+    word: 'PERICOLOSAMENTE',
+    syllables: ['PE', 'RI', 'CO', 'LO', 'SA', 'MEN', 'TE'],
+    difficulty: 'hard',
+  },
+  {
+    word: 'TRANQUILLAMENTE',
+    syllables: ['TRAN', 'QUIL', 'LA', 'MEN', 'TE'],
+    difficulty: 'hard',
+  },
+  {
+    word: 'PRECIPITOSAMENTE',
+    syllables: ['PRE', 'CI', 'PI', 'TO', 'SA', 'MEN', 'TE'],
+    difficulty: 'hard',
+  },
+  {
+    word: 'SPETTACOLARE',
+    syllables: ['SPET', 'TA', 'CO', 'LA', 'RE'],
+    difficulty: 'hard',
+  },
+  {
+    word: 'ELETTRODOMESTICO',
+    syllables: ['E', 'LET', 'TRO', 'DO', 'ME', 'STI', 'CO'],
+    difficulty: 'hard',
+  },
+  {
+    word: 'FOTOGRAFICAMENTE',
+    syllables: ['FO', 'TO', 'GRA', 'FI', 'CA', 'MEN', 'TE'],
+    difficulty: 'hard',
+  },
+  {
+    word: 'CONTEMPORANEAMENTE',
+    syllables: ['CON', 'TEM', 'PO', 'RA', 'NE', 'A', 'MEN', 'TE'],
+    difficulty: 'hard',
+  },
+  {
+    word: 'INCONSAPEVOLMENTE',
+    syllables: ['IN', 'CON', 'SA', 'PE', 'VOL', 'MEN', 'TE'],
+    difficulty: 'hard',
+  },
+  {
+    word: 'STRAORDINARIAMENTE',
+    syllables: ['STRA', 'OR', 'DI', 'NA', 'RIA', 'MEN', 'TE'],
+    difficulty: 'hard',
+  },
+
+];
   /*
    * =====================================================
    * STATE
