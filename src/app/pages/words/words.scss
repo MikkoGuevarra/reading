@@ -840,7 +840,9 @@
     gap: 12px;
   }
 }
-
+.word--capitalized {
+  text-transform: capitalize;
+}
 
 /* =====================================================
    HELP REVIEW CARD

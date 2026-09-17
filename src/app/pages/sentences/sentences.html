@@ -1,0 +1,304 @@
+<div class="sentences-page">
+
+  <main class="sentences-container">
+
+    @if (!finished()) {
+
+      <!-- HEADER -->
+      <header class="training-header">
+
+        <a
+          routerLink="/"
+          class="back-button"
+          aria-label="Torna alla home"
+        >
+          ←
+        </a>
+
+        <div class="header-content">
+          <span class="level-label">
+            Livello 3
+          </span>
+
+          <h1>
+            Frasi
+          </h1>
+        </div>
+
+        <div class="score">
+          {{ fluentAnswers() }}
+          /
+          {{ totalQuestions }}
+        </div>
+
+      </header>
+
+
+      <!-- INSTRUCTION -->
+      <section class="instruction">
+
+        <span class="instruction-icon">
+          📖
+        </span>
+
+        <div>
+          <strong>
+            Leggi la frase
+          </strong>
+
+          <p>
+            Leggila con calma e senza fretta.
+          </p>
+        </div>
+
+      </section>
+
+
+      <!-- SENTENCE CARD -->
+      <section class="sentence-card">
+
+        <span class="sentence-number">
+          Frase {{ currentQuestion() }}
+        </span>
+
+        <p class="sentence">
+          {{ currentSentence().text }}
+        </p>
+
+      </section>
+
+
+      <!-- PROGRESS -->
+      <section class="progress-section">
+
+        <div class="progress-info">
+
+          <span>
+            {{ currentQuestion() }}
+            di
+            {{ totalQuestions }}
+          </span>
+
+          <span>
+            {{ accuracy() }}% fluide
+          </span>
+
+        </div>
+
+        <div class="progress-track">
+
+          <div
+            class="progress-bar"
+            [style.width.%]="
+              (currentQuestion() / totalQuestions) * 100
+            "
+          ></div>
+
+        </div>
+
+      </section>
+
+
+      <!-- ACTIONS -->
+      <section class="actions">
+
+        <button
+          type="button"
+          class="answer-button difficult"
+          (click)="answer(false)"
+        >
+          <span class="answer-icon">
+            ✕
+          </span>
+
+          <span class="answer-text">
+            <strong>Difficoltà</strong>
+            <small>
+              Si è fermata o ha faticato
+            </small>
+          </span>
+        </button>
+
+
+        <button
+          type="button"
+          class="answer-button fluent"
+          (click)="answer(true)"
+        >
+          <span class="answer-icon">
+            ✓
+          </span>
+
+          <span class="answer-text">
+            <strong>Fluida</strong>
+            <small>
+              Letta senza difficoltà
+            </small>
+          </span>
+        </button>
+
+      </section>
+
+
+      <!-- SCORE INFO -->
+      <section class="session-status">
+
+        <div class="status-item">
+          <span class="status-value">
+            {{ fluentAnswers() }}
+          </span>
+
+          <span class="status-label">
+            Fluide
+          </span>
+        </div>
+
+        <div class="status-divider"></div>
+
+        <div class="status-item">
+          <span class="status-value">
+            {{ difficultAnswers() }}
+          </span>
+
+          <span class="status-label">
+            Da allenare
+          </span>
+        </div>
+
+      </section>
+
+    } @else {
+
+
+      <!-- ============================================= -->
+      <!-- RESULT -->
+      <!-- ============================================= -->
+
+      <section class="result">
+
+        <div class="result-icon">
+
+          @if (accuracy() >= 90) {
+            🌟
+          } @else if (accuracy() >= 75) {
+            🎉
+          } @else {
+            💪
+          }
+
+        </div>
+
+
+        <span class="result-level">
+          Livello 3
+        </span>
+
+
+        <h1>
+          Brava Alyza!
+        </h1>
+
+
+        @if (accuracy() >= 90) {
+
+          <p class="result-message">
+            Hai letto le frasi con grande fluidità!
+          </p>
+
+        } @else if (accuracy() >= 75) {
+
+          <p class="result-message">
+            Ottimo lavoro! Continuiamo ad allenare
+            la lettura delle frasi.
+          </p>
+
+        } @else {
+
+          <p class="result-message">
+            Bel lavoro! Alcune frasi hanno bisogno
+            ancora di un po' di allenamento.
+          </p>
+
+        }
+
+
+        <!-- RESULT SCORE -->
+        <div class="result-score">
+
+          <span class="result-score-value">
+            {{ accuracy() }}%
+          </span>
+
+          <span class="result-score-label">
+            Fluidità
+          </span>
+
+        </div>
+
+
+        <!-- RESULT STATS -->
+        <div class="result-stats">
+
+          <div class="result-stat success">
+
+            <span class="result-stat-icon">
+              ✓
+            </span>
+
+            <strong>
+              {{ fluentAnswers() }}
+            </strong>
+
+            <span>
+              Fluide
+            </span>
+
+          </div>
+
+
+          <div class="result-stat warning">
+
+            <span class="result-stat-icon">
+              ↻
+            </span>
+
+            <strong>
+              {{ difficultAnswers() }}
+            </strong>
+
+            <span>
+              Da allenare
+            </span>
+
+          </div>
+
+        </div>
+
+
+        <!-- ACTIONS -->
+        <div class="result-actions">
+
+          <button
+            type="button"
+            class="restart-button"
+            (click)="restart()"
+          >
+            🔄 Nuova sessione
+          </button>
+
+          <a
+            routerLink="/"
+            class="home-button"
+          >
+            ← Torna alla home
+          </a>
+
+        </div>
+
+      </section>
+
+    }
+
+  </main>
+
+</div>

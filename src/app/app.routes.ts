@@ -21,7 +21,11 @@ export const routes: Routes = [
     path: 'words',
     loadComponent: () => import('./pages/words/words').then((m) => m.Words),
   },
-
+  {
+    path: 'sentences',
+    loadComponent: () =>
+      import('./pages/sentences/sentences').then((m) => m.Sentences),
+  },
   {
     path: '**',
     redirectTo: '',

@@ -1,54 +1,33 @@
 <div class="game">
-
   <!-- ================================================= -->
   <!-- HEADER -->
   <!-- ================================================= -->
 
   <header class="game-header">
-
-    <button
-      class="back-button"
-      routerLink="/"
-      aria-label="Torna alla home"
-    >
+    <button class="back-button" routerLink="/" aria-label="Torna alla home">
       ←
     </button>
 
     <div class="game-header__title">
+      <span> Livello 2 </span>
 
-      <span>
-        Livello 2
-      </span>
-
-      <strong>
-        Parole
-      </strong>
-
+      <strong> Parole </strong>
     </div>
 
-    <div class="score">
-      ⭐ {{ correctAnswers() }}
-    </div>
-
+    <div class="score">⭐ {{ correctAnswers() }}</div>
   </header>
-
 
   <!-- ================================================= -->
   <!-- CONTENT -->
   <!-- ================================================= -->
 
   <main class="game-content">
-
     @if (!finished()) {
-
       <!-- =============================================== -->
       <!-- INSTRUCTION -->
       <!-- =============================================== -->
 
-      <div class="instruction">
-        Leggi la parola
-      </div>
-
+      <div class="instruction">Leggi la parola</div>
 
       <!-- =============================================== -->
       <!-- DIFFICULTY -->
@@ -58,509 +37,278 @@
         {{ difficultyLabel() }}
       </div>
 
-
       <!-- =============================================== -->
       <!-- READING CARD -->
       <!-- =============================================== -->
 
       <div class="reading-card">
-
         <!-- PAROLA -->
 
-        <span class="word">
-          {{ currentWord().word }}
+        <span class="word word--capitalized">
+          {{ currentWord().word.toLowerCase() }}
         </span>
-
 
         <!-- ============================================= -->
         <!-- HELP -->
         <!-- ============================================= -->
 
         @if (showHelp()) {
-
           <div class="syllables">
-
-            @for (
-              syllable of currentWord().syllables;
-              track $index
-            ) {
-
+            @for (syllable of currentWord().syllables; track $index) {
               <span class="syllable">
                 {{ syllable }}
               </span>
 
               @if (!$last) {
-
-                <span class="syllable-separator">
-                  ·
-                </span>
-
+                <span class="syllable-separator"> · </span>
               }
-
             }
-
           </div>
-
 
           <button
             class="help-button help-button--active"
             (click)="toggleHelp()"
           >
+            <span> 💡 </span>
 
-            <span>
-              💡
-            </span>
-
-            <span>
-              Nascondi aiuto
-            </span>
-
+            <span> Nascondi aiuto </span>
           </button>
-
         } @else {
+          <button class="help-button" (click)="toggleHelp()">
+            <span> 💡 </span>
 
-          <button
-            class="help-button"
-            (click)="toggleHelp()"
-          >
-
-            <span>
-              💡
-            </span>
-
-            <span>
-              Aiutami
-            </span>
-
+            <span> Aiutami </span>
           </button>
-
         }
-
       </div>
-
 
       <!-- =============================================== -->
       <!-- PROGRESS -->
       <!-- =============================================== -->
 
       <div class="progress">
-
         <span class="progress__current">
           {{ currentQuestion() }}
         </span>
 
-        <span>
-          /
-        </span>
+        <span> / </span>
 
         <span>
           {{ totalQuestions }}
         </span>
-
       </div>
-
 
       <!-- =============================================== -->
       <!-- ACTIONS -->
       <!-- =============================================== -->
 
       <div class="actions">
-
         <button
           class="action-button action-button--wrong"
           (click)="answer(false)"
         >
+          <span class="action-button__icon"> ✕ </span>
 
-          <span class="action-button__icon">
-            ✕
-          </span>
-
-          <span>
-            Errore
-          </span>
-
+          <span> Errore </span>
         </button>
-
 
         <button
           class="action-button action-button--correct"
           (click)="answer(true)"
         >
+          <span class="action-button__icon"> ✓ </span>
 
-          <span class="action-button__icon">
-            ✓
-          </span>
-
-          <span>
-            Giusto
-          </span>
-
+          <span> Giusto </span>
         </button>
-
       </div>
-
     } @else {
-
       <!-- ================================================= -->
       <!-- RESULT -->
       <!-- ================================================= -->
 
       <div class="result">
+        <div class="result__emoji">🎉</div>
 
-        <div class="result__emoji">
-          🎉
-        </div>
+        <h1>Bravissima Alyza!</h1>
 
-        <h1>
-          Bravissima Alyza!
-        </h1>
-
-        <p>
-          Hai completato l'allenamento
-          con le parole.
-        </p>
-
+        <p>Hai completato l'allenamento con le parole.</p>
 
         <!-- =============================================== -->
         <!-- SCORE -->
         <!-- =============================================== -->
 
         <div class="result__score">
-
           <div>
-
             <strong>
               {{ correctAnswers() }}
             </strong>
 
-            <span>
-              Giuste
-            </span>
-
+            <span> Giuste </span>
           </div>
 
-
           <div>
-
             <strong>
               {{ wrongAnswers() }}
             </strong>
 
-            <span>
-              Errori
-            </span>
-
+            <span> Errori </span>
           </div>
-
 
           <div>
+            <strong> {{ accuracy() }}% </strong>
 
-            <strong>
-              {{ accuracy() }}%
-            </strong>
-
-            <span>
-              Precisione
-            </span>
-
+            <span> Precisione </span>
           </div>
-
         </div>
-
 
         <!-- =============================================== -->
         <!-- HELP SUMMARY -->
         <!-- =============================================== -->
 
         <div class="help-summary">
-
-          <div class="help-summary__icon">
-            💡
-          </div>
-
+          <div class="help-summary__icon">💡</div>
 
           <div>
-
             <strong>
               {{ helpCount() }}
             </strong>
 
             <span>
-
               @if (helpCount() === 1) {
-
                 parola letta con aiuto
-
               } @else {
-
                 parole lette con aiuto
-
               }
-
             </span>
-
           </div>
 
-
           <div class="help-summary__independent">
-
             <strong>
               {{ independentAnswers() }}
             </strong>
 
-            <span>
-              senza aiuto
-            </span>
-
+            <span> senza aiuto </span>
           </div>
-
         </div>
-
 
         <!-- =============================================== -->
         <!-- ERRORS -->
         <!-- =============================================== -->
 
         @if (errorList().length > 0) {
-
           <div class="review">
-
             <div class="review__header">
-
-              <span class="review__icon">
-                💪
-              </span>
-
+              <span class="review__icon"> 💪 </span>
 
               <div>
+                <h2>Da allenare ancora</h2>
 
-                <h2>
-                  Da allenare ancora
-                </h2>
-
-                <p>
-                  Nessun problema,
-                  riproviamo insieme!
-                </p>
-
+                <p>Nessun problema, riproviamo insieme!</p>
               </div>
-
             </div>
 
-
             <div class="review__words">
-
-              @for (
-                item of errorList();
-                track item.word
-              ) {
-
+              @for (item of errorList(); track item.word) {
                 <div class="review-card">
-
                   <strong>
                     {{ item.word }}
                   </strong>
 
-
                   <div class="review-card__syllables">
-
-                    @for (
-                      syllable of item.syllables;
-                      track $index
-                    ) {
-
+                    @for (syllable of item.syllables; track $index) {
                       <span>
                         {{ syllable }}
                       </span>
 
                       @if (!$last) {
-
-                        <span>
-                          ·
-                        </span>
-
+                        <span> · </span>
                       }
-
                     }
-
                   </div>
 
-
                   <small>
-
                     @if (item.count === 1) {
-
                       1 errore
-
                     } @else {
-
                       {{ item.count }} errori
-
                     }
-
                   </small>
-
                 </div>
-
               }
-
             </div>
-
           </div>
-
         }
-
 
         <!-- =============================================== -->
         <!-- HELP USED -->
         <!-- =============================================== -->
 
         @if (helpList().length > 0) {
-
           <div class="help-review">
-
             <div class="help-review__header">
-
-              <span class="help-review__icon">
-                💡
-              </span>
-
+              <span class="help-review__icon"> 💡 </span>
 
               <div>
+                <h2>Parole lette con aiuto</h2>
 
-                <h2>
-                  Parole lette con aiuto
-                </h2>
-
-                <p>
-                  Continuiamo ad allenarle
-                  finché diventano più facili.
-                </p>
-
+                <p>Continuiamo ad allenarle finché diventano più facili.</p>
               </div>
-
             </div>
 
-
             <div class="help-review__words">
-
-              @for (
-                item of helpList();
-                track item.word
-              ) {
-
+              @for (item of helpList(); track item.word) {
                 <div class="help-review-card">
-
                   <strong>
                     {{ item.word }}
                   </strong>
 
-
                   <div class="help-review-card__syllables">
-
-                    @for (
-                      syllable of item.syllables;
-                      track $index
-                    ) {
-
+                    @for (syllable of item.syllables; track $index) {
                       <span>
                         {{ syllable }}
                       </span>
 
                       @if (!$last) {
-
-                        <span>
-                          ·
-                        </span>
-
+                        <span> · </span>
                       }
-
                     }
-
                   </div>
-
                 </div>
-
               }
-
             </div>
-
           </div>
-
         }
-
 
         <!-- =============================================== -->
         <!-- RESULT ACTIONS -->
         <!-- =============================================== -->
 
         <div class="result-actions">
-
-          <button
-            class="result-button result-button--play"
-            (click)="restart()"
-          >
-
-            <span class="result-button__icon">
-              🔄
-            </span>
-
+          <button class="result-button result-button--play" (click)="restart()">
+            <span class="result-button__icon"> 🔄 </span>
 
             <span class="result-button__content">
+              <strong> Gioca ancora </strong>
 
-              <strong>
-                Gioca ancora
-              </strong>
-
-              <small>
-                Facciamo un'altra partita!
-              </small>
-
+              <small> Facciamo un'altra partita! </small>
             </span>
 
-
-            <span class="result-button__arrow">
-              →
-            </span>
-
+            <span class="result-button__arrow"> → </span>
           </button>
 
-
-          <button
-            class="result-button result-button--home"
-            routerLink="/"
-          >
-
-            <span class="result-button__icon">
-              🏠
-            </span>
-
+          <button class="result-button result-button--home" routerLink="/">
+            <span class="result-button__icon"> 🏠 </span>
 
             <span class="result-button__content">
+              <strong> Torna alla Home </strong>
 
-              <strong>
-                Torna alla Home
-              </strong>
-
-              <small>
-                Scegli un altro esercizio
-              </small>
-
+              <small> Scegli un altro esercizio </small>
             </span>
 
-
-            <span class="result-button__arrow">
-              →
-            </span>
-
+            <span class="result-button__arrow"> → </span>
           </button>
-
         </div>
-
       </div>
-
     }
-
   </main>
-
 </div>
