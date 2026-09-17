@@ -1,0 +1,1350 @@
+<div class="progress-page">
+
+  <div class="progress-page__container">
+
+    <!-- ================================================= -->
+    <!-- HEADER -->
+    <!-- ================================================= -->
+
+    <header class="page-header">
+
+      <button
+        class="back-button"
+        routerLink="/"
+        aria-label="Torna alla home"
+      >
+        ←
+      </button>
+
+
+      <div class="page-header__title">
+
+        <span>
+          🏆
+        </span>
+
+        <div>
+
+          <small>
+            Progressi
+          </small>
+
+          <h1>
+            Alyza
+          </h1>
+
+        </div>
+
+      </div>
+
+
+      <div class="header-spacer"></div>
+
+    </header>
+
+
+    <!-- ================================================= -->
+    <!-- INTRO -->
+    <!-- ================================================= -->
+
+    <section class="intro">
+
+      <div class="intro__emoji">
+        🌟
+      </div>
+
+      <h2>
+        Continua così!
+      </h2>
+
+      <p>
+        Qui puoi vedere come sta andando
+        l'allenamento di lettura.
+      </p>
+
+    </section>
+
+
+    <!-- ================================================= -->
+    <!-- TABS -->
+    <!-- ================================================= -->
+
+    <div class="progress-tabs">
+
+      <button
+        class="progress-tab"
+        [class.progress-tab--active]="activeTab() === 'syllables'"
+        (click)="setTab('syllables')"
+      >
+
+        <span>
+          🔤
+        </span>
+
+        <strong>
+          Sillabe
+        </strong>
+
+      </button>
+
+
+      <button
+        class="progress-tab"
+        [class.progress-tab--active]="activeTab() === 'words'"
+        (click)="setTab('words')"
+      >
+
+        <span>
+          🍎
+        </span>
+
+        <strong>
+          Parole
+        </strong>
+
+      </button>
+
+    </div>
+
+
+    <!-- ================================================= -->
+    <!-- NO PROGRESS AT ALL -->
+    <!-- ================================================= -->
+
+    @if (!hasAnyProgress()) {
+
+      <section class="empty-state">
+
+        <div class="empty-state__emoji">
+          🌱
+        </div>
+
+        <h2>
+          Iniziamo ad allenarci!
+        </h2>
+
+        <p>
+          Completa qualche esercizio
+          e qui vedrai i progressi di Alyza.
+        </p>
+
+        <button
+          class="play-button"
+          routerLink="/syllables"
+        >
+
+          <span class="play-button__icon">
+            🔤
+          </span>
+
+          <span class="play-button__content">
+
+            <strong>
+              Inizia con le sillabe
+            </strong>
+
+            <small>
+              Facciamo un allenamento
+            </small>
+
+          </span>
+
+          <span class="play-button__arrow">
+            →
+          </span>
+
+        </button>
+
+      </section>
+
+    }
+
+
+    <!-- ================================================= -->
+    <!-- SYLLABLE TAB -->
+    <!-- ================================================= -->
+
+    @else if (
+      activeTab() === 'syllables'
+    ) {
+
+      @if (hasSyllableProgress()) {
+
+        <!-- ============================================= -->
+        <!-- STATS -->
+        <!-- ============================================= -->
+
+        <section class="stats">
+
+          <div class="stat-card">
+
+            <span class="stat-card__icon">
+              🎯
+            </span>
+
+            <strong>
+              {{ syllableAccuracy() }}%
+            </strong>
+
+            <span>
+              Precisione
+            </span>
+
+          </div>
+
+
+          <div class="stat-card">
+
+            <span class="stat-card__icon">
+              🔤
+            </span>
+
+            <strong>
+              {{ trainedSyllables() }}
+            </strong>
+
+            <span>
+              Sillabe allenate
+            </span>
+
+          </div>
+
+
+          <div class="stat-card">
+
+            <span class="stat-card__icon">
+              ⭐
+            </span>
+
+            <strong>
+              {{ syllableCorrect() }}
+            </strong>
+
+            <span>
+              Risposte corrette
+            </span>
+
+          </div>
+
+
+          <div class="stat-card">
+
+            <span class="stat-card__icon">
+              💪
+            </span>
+
+            <strong>
+              {{ syllableAttempts() }}
+            </strong>
+
+            <span>
+              Tentativi
+            </span>
+
+          </div>
+
+        </section>
+
+
+        <!-- ============================================= -->
+        <!-- SESSIONS -->
+        <!-- ============================================= -->
+
+        @if (
+          recentSyllableSessions().length > 0
+        ) {
+
+          <section class="section">
+
+            <div class="section__header">
+
+              <span>
+                📈
+              </span>
+
+              <div>
+
+                <h2>
+                  Ultime sessioni
+                </h2>
+
+                <p>
+                  Andamento degli ultimi
+                  allenamenti con le sillabe.
+                </p>
+
+              </div>
+
+            </div>
+
+
+            @if (
+              recentSyllableSessions().length >= 2
+            ) {
+
+              <div class="trend-card">
+
+                <div class="trend-card__icon">
+
+                  @if (
+                    syllableTrendDirection() === 'up'
+                  ) {
+                    🚀
+                  }
+
+                  @else if (
+                    syllableTrendDirection() === 'down'
+                  ) {
+                    💪
+                  }
+
+                  @else {
+                    ⭐
+                  }
+
+                </div>
+
+
+                <div class="trend-card__content">
+
+                  @if (
+                    syllableTrendDirection() === 'up'
+                  ) {
+
+                    <strong>
+                      Stai migliorando!
+                    </strong>
+
+                    <span>
+                      +{{ syllableTrendDifference() }}%
+                      rispetto alla sessione precedente
+                    </span>
+
+                  }
+
+                  @else if (
+                    syllableTrendDirection() === 'down'
+                  ) {
+
+                    <strong>
+                      Continuiamo ad allenarci!
+                    </strong>
+
+                    <span>
+                      {{ syllableTrendDifference() }}%
+                      rispetto alla sessione precedente
+                    </span>
+
+                  }
+
+                  @else {
+
+                    <strong>
+                      Risultato stabile!
+                    </strong>
+
+                    <span>
+                      Stessa precisione
+                      della sessione precedente
+                    </span>
+
+                  }
+
+                </div>
+
+              </div>
+
+            }
+
+
+            <div class="sessions-list">
+
+              @for (
+                session of recentSyllableSessions();
+                track session.date;
+                let index = $index
+              ) {
+
+                <div class="session-card">
+
+                  <div class="session-card__number">
+
+                    @if (index === 0) {
+                      ⭐
+                    } @else {
+                      {{ index + 1 }}
+                    }
+
+                  </div>
+
+
+                  <div class="session-card__content">
+
+                    <strong>
+
+                      @if (index === 0) {
+                        Ultima sessione
+                      } @else {
+                        Sessione precedente
+                      }
+
+                    </strong>
+
+                    <span>
+                      {{ formatSessionDate(session.date) }}
+                    </span>
+
+                    <small>
+                      {{ session.correct }} corrette ·
+                      {{ session.errors }} errori
+                    </small>
+
+                  </div>
+
+
+                  <div class="session-card__accuracy">
+                    {{ session.accuracy }}%
+                  </div>
+
+                </div>
+
+              }
+
+            </div>
+
+          </section>
+
+        }
+
+
+        <!-- ============================================= -->
+        <!-- CONFUSION GROUPS -->
+        <!-- ============================================= -->
+
+        @if (
+          confusionGroups().length > 0
+        ) {
+
+          <section class="section">
+
+            <div class="section__header">
+
+              <span>
+                🧠
+              </span>
+
+              <div>
+
+                <h2>
+                  Gruppi simili
+                </h2>
+
+                <p>
+                  Vediamo come vanno
+                  le sillabe più simili.
+                </p>
+
+              </div>
+
+            </div>
+
+
+            <div class="confusion-list">
+
+              @for (
+                group of confusionGroups();
+                track group.label
+              ) {
+
+                <div class="confusion-card">
+
+                  <div>
+
+                    <strong>
+                      {{ group.label }}
+                    </strong>
+
+                    <span>
+                      {{ group.accuracy }}% precisione
+                    </span>
+
+                    <small>
+                      {{ group.correct }}/{{ group.attempts }}
+                      corrette
+                    </small>
+
+                  </div>
+
+
+                  <div class="confusion-card__accuracy">
+                    {{ group.accuracy }}%
+                  </div>
+
+                </div>
+
+              }
+
+            </div>
+
+          </section>
+
+        }
+
+
+        <!-- ============================================= -->
+        <!-- NEED PRACTICE -->
+        <!-- ============================================= -->
+
+        @if (
+          syllablesNeedPractice().length > 0
+        ) {
+
+          <section class="section">
+
+            <div class="section__header">
+
+              <span>
+                💪
+              </span>
+
+              <div>
+
+                <h2>
+                  Da allenare ancora
+                </h2>
+
+                <p>
+                  Queste sillabe hanno bisogno
+                  di un po' più di pratica.
+                </p>
+
+              </div>
+
+            </div>
+
+
+            <div class="syllable-grid">
+
+              @for (
+                item of syllablesNeedPractice();
+                track item.syllable
+              ) {
+
+                <div class="syllable-card">
+
+                  <strong>
+                    {{ item.syllable }}
+                  </strong>
+
+                  <span class="syllable-card__accuracy">
+                    {{ item.accuracy }}%
+                  </span>
+
+                  <small>
+                    {{ item.correct }}/{{ item.attempts }}
+                    corrette
+                  </small>
+
+                  <small>
+                    {{ item.errors }}
+                    errori
+                  </small>
+
+                </div>
+
+              }
+
+            </div>
+
+          </section>
+
+        }
+
+
+        <!-- ============================================= -->
+        <!-- DOING WELL -->
+        <!-- ============================================= -->
+
+        @if (
+          syllablesDoingWell().length > 0
+        ) {
+
+          <section class="section section--success">
+
+            <div class="section__header">
+
+              <span>
+                ⭐
+              </span>
+
+              <div>
+
+                <h2>
+                  Molto bene!
+                </h2>
+
+                <p>
+                  Queste sillabe stanno
+                  andando molto bene.
+                </p>
+
+              </div>
+
+            </div>
+
+
+            <div class="syllable-grid">
+
+              @for (
+                item of syllablesDoingWell();
+                track item.syllable
+              ) {
+
+                <div
+                  class="syllable-card syllable-card--success"
+                >
+
+                  <strong>
+                    {{ item.syllable }}
+                  </strong>
+
+                  <span class="syllable-card__accuracy">
+                    {{ item.accuracy }}%
+                  </span>
+
+                  <small>
+                    {{ item.correct }}/{{ item.attempts }}
+                    corrette
+                  </small>
+
+                </div>
+
+              }
+
+            </div>
+
+          </section>
+
+        }
+
+
+        <!-- ============================================= -->
+        <!-- ALL SYLLABLES -->
+        <!-- ============================================= -->
+
+        <section class="section">
+
+          <div class="section__header">
+
+            <span>
+              📊
+            </span>
+
+            <div>
+
+              <h2>
+                Tutte le sillabe
+              </h2>
+
+              <p>
+                Statistiche complete.
+              </p>
+
+            </div>
+
+          </div>
+
+
+          <div class="syllable-grid">
+
+            @for (
+              item of syllableProgress();
+              track item.syllable
+            ) {
+
+              <div class="syllable-card">
+
+                <strong>
+                  {{ item.syllable }}
+                </strong>
+
+                <span class="syllable-card__accuracy">
+                  {{ item.accuracy }}%
+                </span>
+
+                <small>
+                  {{ item.correct }}/{{ item.attempts }}
+                  corrette
+                </small>
+
+              </div>
+
+            }
+
+          </div>
+
+        </section>
+
+
+        <button
+          class="play-button"
+          routerLink="/syllables"
+        >
+
+          <span class="play-button__icon">
+            🔤
+          </span>
+
+          <span class="play-button__content">
+
+            <strong>
+              Continua con le sillabe
+            </strong>
+
+            <small>
+              Facciamo un'altra sessione
+            </small>
+
+          </span>
+
+          <span class="play-button__arrow">
+            →
+          </span>
+
+        </button>
+
+      }
+
+      @else {
+
+        <section class="empty-state">
+
+          <div class="empty-state__emoji">
+            🔤
+          </div>
+
+          <h2>
+            Nessun allenamento
+          </h2>
+
+          <p>
+            Completa una sessione
+            con le sillabe per vedere
+            i progressi.
+          </p>
+
+          <button
+            class="play-button"
+            routerLink="/syllables"
+          >
+
+            <span class="play-button__icon">
+              🔤
+            </span>
+
+            <span class="play-button__content">
+
+              <strong>
+                Allenati con le sillabe
+              </strong>
+
+              <small>
+                Inizia una sessione
+              </small>
+
+            </span>
+
+            <span class="play-button__arrow">
+              →
+            </span>
+
+          </button>
+
+        </section>
+
+      }
+
+    }
+
+
+    <!-- ================================================= -->
+    <!-- WORD TAB -->
+    <!-- ================================================= -->
+
+    @else {
+
+      @if (hasWordProgress()) {
+
+        <!-- ============================================= -->
+        <!-- WORD STATS -->
+        <!-- ============================================= -->
+
+        <section class="stats">
+
+          <div class="stat-card">
+
+            <span class="stat-card__icon">
+              🎯
+            </span>
+
+            <strong>
+              {{ wordAccuracy() }}%
+            </strong>
+
+            <span>
+              Precisione
+            </span>
+
+          </div>
+
+
+          <div class="stat-card">
+
+            <span class="stat-card__icon">
+              🍎
+            </span>
+
+            <strong>
+              {{ trainedWords() }}
+            </strong>
+
+            <span>
+              Parole allenate
+            </span>
+
+          </div>
+
+
+          <div class="stat-card">
+
+            <span class="stat-card__icon">
+              ⭐
+            </span>
+
+            <strong>
+              {{ wordCorrect() }}
+            </strong>
+
+            <span>
+              Risposte corrette
+            </span>
+
+          </div>
+
+
+          <div class="stat-card">
+
+            <span class="stat-card__icon">
+              💡
+            </span>
+
+            <strong>
+              {{ wordHelps() }}
+            </strong>
+
+            <span>
+              Aiuti usati
+            </span>
+
+          </div>
+
+        </section>
+
+
+        <!-- ============================================= -->
+        <!-- WORD SESSIONS -->
+        <!-- ============================================= -->
+
+        @if (
+          recentWordSessions().length > 0
+        ) {
+
+          <section class="section">
+
+            <div class="section__header">
+
+              <span>
+                📈
+              </span>
+
+              <div>
+
+                <h2>
+                  Ultime sessioni
+                </h2>
+
+                <p>
+                  Andamento degli ultimi
+                  allenamenti con le parole.
+                </p>
+
+              </div>
+
+            </div>
+
+
+            @if (
+              recentWordSessions().length >= 2
+            ) {
+
+              <div class="trend-card">
+
+                <div class="trend-card__icon">
+
+                  @if (
+                    wordTrendDirection() === 'up'
+                  ) {
+                    🚀
+                  }
+
+                  @else if (
+                    wordTrendDirection() === 'down'
+                  ) {
+                    💪
+                  }
+
+                  @else {
+                    ⭐
+                  }
+
+                </div>
+
+
+                <div class="trend-card__content">
+
+                  @if (
+                    wordTrendDirection() === 'up'
+                  ) {
+
+                    <strong>
+                      Stai migliorando!
+                    </strong>
+
+                    <span>
+                      +{{ wordTrendDifference() }}%
+                      rispetto alla sessione precedente
+                    </span>
+
+                  }
+
+                  @else if (
+                    wordTrendDirection() === 'down'
+                  ) {
+
+                    <strong>
+                      Continuiamo ad allenarci!
+                    </strong>
+
+                    <span>
+                      {{ wordTrendDifference() }}%
+                      rispetto alla sessione precedente
+                    </span>
+
+                  }
+
+                  @else {
+
+                    <strong>
+                      Risultato stabile!
+                    </strong>
+
+                    <span>
+                      Stessa precisione
+                      della sessione precedente
+                    </span>
+
+                  }
+
+                </div>
+
+              </div>
+
+            }
+
+
+            <div class="sessions-list">
+
+              @for (
+                session of recentWordSessions();
+                track session.date;
+                let index = $index
+              ) {
+
+                <div class="session-card">
+
+                  <div class="session-card__number">
+
+                    @if (index === 0) {
+                      ⭐
+                    } @else {
+                      {{ index + 1 }}
+                    }
+
+                  </div>
+
+
+                  <div class="session-card__content">
+
+                    <strong>
+
+                      @if (index === 0) {
+                        Ultima sessione
+                      } @else {
+                        Sessione precedente
+                      }
+
+                    </strong>
+
+                    <span>
+                      {{ formatSessionDate(session.date) }}
+                    </span>
+
+                    <small>
+                      {{ session.correct }} corrette ·
+                      {{ session.errors }} errori ·
+                      {{ session.helps }} aiuti
+                    </small>
+
+                  </div>
+
+
+                  <div class="session-card__accuracy">
+                    {{ session.accuracy }}%
+                  </div>
+
+                </div>
+
+              }
+
+            </div>
+
+          </section>
+
+        }
+
+
+        <!-- ============================================= -->
+        <!-- WORDS NEED PRACTICE -->
+        <!-- ============================================= -->
+
+        @if (
+          wordsNeedPractice().length > 0
+        ) {
+
+          <section class="section">
+
+            <div class="section__header">
+
+              <span>
+                💪
+              </span>
+
+              <div>
+
+                <h2>
+                  Da allenare ancora
+                </h2>
+
+                <p>
+                  Parole con più errori
+                  o che richiedono ancora aiuto.
+                </p>
+
+              </div>
+
+            </div>
+
+
+            <div class="word-progress-grid">
+
+              @for (
+                item of wordsNeedPractice();
+                track item.word
+              ) {
+
+                <div class="word-progress-card">
+
+                  <strong>
+                    {{ item.word }}
+                  </strong>
+
+                  <span class="word-progress-card__accuracy">
+                    {{ item.accuracy }}%
+                  </span>
+
+                  <small>
+                    {{ item.correct }}/{{ item.attempts }}
+                    corrette
+                  </small>
+
+                  @if (item.helps > 0) {
+
+                    <span class="word-progress-card__help">
+                      💡 {{ item.helps }}
+                      aiuti
+                    </span>
+
+                  }
+
+                </div>
+
+              }
+
+            </div>
+
+          </section>
+
+        }
+
+
+        <!-- ============================================= -->
+        <!-- WORDS DOING WELL -->
+        <!-- ============================================= -->
+
+        @if (
+          wordsDoingWell().length > 0
+        ) {
+
+          <section class="section section--success">
+
+            <div class="section__header">
+
+              <span>
+                ⭐
+              </span>
+
+              <div>
+
+                <h2>
+                  Molto bene!
+                </h2>
+
+                <p>
+                  Queste parole vengono lette
+                  bene e quasi sempre senza aiuto.
+                </p>
+
+              </div>
+
+            </div>
+
+
+            <div class="word-progress-grid">
+
+              @for (
+                item of wordsDoingWell();
+                track item.word
+              ) {
+
+                <div
+                  class="word-progress-card word-progress-card--success"
+                >
+
+                  <strong>
+                    {{ item.word }}
+                  </strong>
+
+                  <span class="word-progress-card__accuracy">
+                    {{ item.accuracy }}%
+                  </span>
+
+                  <small>
+                    {{ item.correct }}/{{ item.attempts }}
+                    corrette
+                  </small>
+
+                </div>
+
+              }
+
+            </div>
+
+          </section>
+
+        }
+
+
+        <!-- ============================================= -->
+        <!-- ALL WORDS -->
+        <!-- ============================================= -->
+
+        <section class="section">
+
+          <div class="section__header">
+
+            <span>
+              📊
+            </span>
+
+            <div>
+
+              <h2>
+                Tutte le parole
+              </h2>
+
+              <p>
+                Statistiche complete
+                delle parole allenate.
+              </p>
+
+            </div>
+
+          </div>
+
+
+          <div class="word-progress-grid">
+
+            @for (
+              item of wordProgress();
+              track item.word
+            ) {
+
+              <div class="word-progress-card">
+
+                <strong>
+                  {{ item.word }}
+                </strong>
+
+                <span class="word-progress-card__accuracy">
+                  {{ item.accuracy }}%
+                </span>
+
+                <small>
+                  {{ item.correct }}/{{ item.attempts }}
+                  corrette
+                </small>
+
+                @if (item.helps > 0) {
+
+                  <span class="word-progress-card__help">
+                    💡 {{ item.helps }}
+                  </span>
+
+                }
+
+              </div>
+
+            }
+
+          </div>
+
+        </section>
+
+
+        <button
+          class="play-button play-button--words"
+          routerLink="/words"
+        >
+
+          <span class="play-button__icon">
+            🍎
+          </span>
+
+          <span class="play-button__content">
+
+            <strong>
+              Continua con le parole
+            </strong>
+
+            <small>
+              Facciamo un'altra sessione
+            </small>
+
+          </span>
+
+          <span class="play-button__arrow">
+            →
+          </span>
+
+        </button>
+
+      }
+
+      @else {
+
+        <section class="empty-state">
+
+          <div class="empty-state__emoji">
+            🍎
+          </div>
+
+          <h2>
+            Nessuna parola ancora
+          </h2>
+
+          <p>
+            Completa una sessione
+            con le parole per vedere
+            i progressi.
+          </p>
+
+          <button
+            class="play-button play-button--words"
+            routerLink="/words"
+          >
+
+            <span class="play-button__icon">
+              🍎
+            </span>
+
+            <span class="play-button__content">
+
+              <strong>
+                Allenati con le parole
+              </strong>
+
+              <small>
+                Inizia una sessione
+              </small>
+
+            </span>
+
+            <span class="play-button__arrow">
+              →
+            </span>
+
+          </button>
+
+        </section>
+
+      }
+
+    }
+
+
+    <!-- ================================================= -->
+    <!-- PARENT AREA -->
+    <!-- ================================================= -->
+
+    @if (hasAnyProgress()) {
+
+      <section class="parent-area">
+
+        <div>
+
+          <strong>
+            👨‍👩‍👧 Area genitore
+          </strong>
+
+          <p>
+            Cancella statistiche e sessioni
+            di sillabe e parole.
+          </p>
+
+        </div>
+
+
+        <button
+          class="reset-button"
+          (click)="resetProgress()"
+        >
+          Azzera progressi
+        </button>
+
+      </section>
+
+    }
+
+  </div>
+
+</div>

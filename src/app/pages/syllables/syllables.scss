@@ -1,0 +1,768 @@
+:host {
+  display: block;
+  min-height: 100dvh;
+}
+
+.game {
+  min-height: 100dvh;
+  box-sizing: border-box;
+
+  padding:
+    max(24px, env(safe-area-inset-top))
+    max(28px, env(safe-area-inset-right))
+    max(28px, env(safe-area-inset-bottom))
+    max(28px, env(safe-area-inset-left));
+
+  background: linear-gradient(
+    180deg,
+    #f3f8ff 0%,
+    #ffffff 100%
+  );
+
+  font-family: Arial, sans-serif;
+}
+
+
+/* =====================================================
+   HEADER
+===================================================== */
+
+.game-header {
+  width: 100%;
+  max-width: 900px;
+
+  margin: 0 auto;
+
+  display: grid;
+  grid-template-columns: 80px 1fr 80px;
+  align-items: center;
+
+  &__title {
+    text-align: center;
+
+    span {
+      display: block;
+      margin-bottom: 3px;
+
+      font-size: 15px;
+      font-weight: 700;
+
+      color: #64748b;
+
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    strong {
+      font-size: 25px;
+      color: #1e293b;
+    }
+  }
+}
+
+
+.back-button {
+  width: 58px;
+  height: 58px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border: 0;
+  border-radius: 18px;
+
+  background: #ffffff;
+
+  font-size: 30px;
+  font-weight: 700;
+
+  color: #334155;
+
+  box-shadow: 0 3px 12px rgba(15, 23, 42, 0.08);
+
+  cursor: pointer;
+  touch-action: manipulation;
+
+  &:active {
+    transform: scale(0.95);
+  }
+
+  &:focus-visible {
+    outline: 4px solid #2563eb;
+    outline-offset: 3px;
+  }
+}
+
+
+.score {
+  text-align: right;
+
+  font-size: 20px;
+  font-weight: 800;
+
+  color: #334155;
+}
+
+
+/* =====================================================
+   GAME
+===================================================== */
+
+.game-content {
+  width: 100%;
+  max-width: 780px;
+
+  margin: 45px auto 0;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+
+.instruction {
+  margin-bottom: 20px;
+
+  font-size: 20px;
+  font-weight: 600;
+
+  color: #64748b;
+}
+
+
+/* =====================================================
+   READING CARD
+===================================================== */
+
+.reading-card {
+  width: 100%;
+  min-height: 330px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  box-sizing: border-box;
+
+  background: #ffffff;
+
+  border: 3px solid #dbeafe;
+  border-radius: 36px;
+
+  box-shadow:
+    0 12px 35px rgba(15, 23, 42, 0.07);
+
+  user-select: none;
+}
+
+
+.syllable {
+  font-size: clamp(90px, 15vw, 150px);
+  line-height: 1;
+
+  font-weight: 800;
+
+  letter-spacing: 4px;
+
+  color: #1e293b;
+}
+
+
+/* =====================================================
+   PROGRESS
+===================================================== */
+
+.progress {
+  display: flex;
+  align-items: center;
+
+  gap: 6px;
+
+  margin: 22px 0;
+
+  font-size: 19px;
+  font-weight: 700;
+
+  color: #94a3b8;
+
+  &__current {
+    color: #2563eb;
+  }
+}
+
+
+/* =====================================================
+   CORRECT / WRONG BUTTONS
+===================================================== */
+
+.actions {
+  width: 100%;
+
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+
+  gap: 18px;
+}
+
+
+.action-button {
+  min-height: 100px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  gap: 12px;
+
+  border: 0;
+  border-radius: 26px;
+
+  font-family: inherit;
+
+  font-size: 23px;
+  font-weight: 800;
+
+  cursor: pointer;
+  touch-action: manipulation;
+
+  box-shadow:
+    0 6px 18px rgba(15, 23, 42, 0.06);
+
+  transition:
+    transform 100ms ease,
+    box-shadow 100ms ease;
+
+  &:active {
+    transform: scale(0.96);
+
+    box-shadow:
+      0 3px 8px rgba(15, 23, 42, 0.08);
+  }
+
+  &:focus-visible {
+    outline: 4px solid #2563eb;
+    outline-offset: 4px;
+  }
+
+  &__icon {
+    font-size: 32px;
+  }
+
+  &--wrong {
+    background: #fee2e2;
+    color: #b91c1c;
+  }
+
+  &--correct {
+    background: #dcfce7;
+    color: #15803d;
+  }
+}
+
+
+/* =====================================================
+   RESULT SCREEN
+===================================================== */
+
+.result {
+  width: 100%;
+
+  text-align: center;
+
+  &__emoji {
+    font-size: 80px;
+    line-height: 1;
+
+    margin-bottom: 18px;
+  }
+
+  h1 {
+    margin: 0;
+
+    font-size: 38px;
+    line-height: 1.2;
+
+    color: #1e293b;
+  }
+
+  > p {
+    margin: 10px 0 0;
+
+    font-size: 20px;
+
+    color: #64748b;
+  }
+}
+
+
+/* =====================================================
+   RESULT STATS
+===================================================== */
+
+.result__score {
+  width: 100%;
+
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+
+  gap: 16px;
+
+  margin: 35px 0;
+
+  div {
+    padding: 25px 15px;
+
+    background: #ffffff;
+
+    border-radius: 22px;
+
+    box-shadow:
+      0 5px 20px rgba(15, 23, 42, 0.06);
+
+    strong {
+      display: block;
+
+      font-size: 35px;
+      line-height: 1.1;
+
+      color: #1e293b;
+    }
+
+    span {
+      display: block;
+
+      margin-top: 7px;
+
+      font-size: 16px;
+      font-weight: 600;
+
+      color: #64748b;
+    }
+  }
+}
+
+
+/* =====================================================
+   RESULT ACTIONS
+===================================================== */
+
+.result-actions {
+  width: 100%;
+  max-width: 650px;
+
+  display: flex;
+  flex-direction: column;
+
+  gap: 16px;
+
+  margin: 28px auto 0;
+}
+
+
+.result-button {
+  width: 100%;
+  min-height: 105px;
+
+  display: flex;
+  align-items: center;
+
+  gap: 18px;
+
+  box-sizing: border-box;
+
+  padding: 18px 24px;
+
+  border: 0;
+  border-radius: 28px;
+
+  font-family: inherit;
+  text-align: left;
+
+  cursor: pointer;
+  touch-action: manipulation;
+
+  box-shadow:
+    0 8px 20px rgba(15, 23, 42, 0.08);
+
+  transition:
+    transform 100ms ease,
+    box-shadow 100ms ease;
+
+  &:active {
+    transform: scale(0.97);
+
+    box-shadow:
+      0 3px 10px rgba(15, 23, 42, 0.08);
+  }
+
+  &:focus-visible {
+    outline: 4px solid #2563eb;
+    outline-offset: 4px;
+  }
+
+  /* Icon container */
+  &__icon {
+    width: 64px;
+    height: 64px;
+
+    flex: 0 0 64px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    background: rgba(255, 255, 255, 0.75);
+
+    border-radius: 20px;
+
+    font-size: 32px;
+  }
+
+  /* Text */
+  &__content {
+    flex: 1;
+
+    display: flex;
+    flex-direction: column;
+
+    strong {
+      font-size: 23px;
+      line-height: 1.2;
+    }
+
+    small {
+      margin-top: 5px;
+
+      font-size: 15px;
+      font-weight: 600;
+
+      opacity: 0.7;
+    }
+  }
+
+  /* Arrow */
+  &__arrow {
+    flex-shrink: 0;
+
+    font-size: 34px;
+    font-weight: 800;
+  }
+
+
+  /* Play again */
+  &--play {
+    background: #dbeafe;
+    color: #1d4ed8;
+  }
+
+
+  /* Home */
+  &--home {
+    background: #f1f5f9;
+    color: #475569;
+  }
+}
+
+
+/* =====================================================
+   IPAD LANDSCAPE
+===================================================== */
+
+@media (min-width: 900px) {
+
+  .game-content {
+    margin-top: 35px;
+  }
+
+  .reading-card {
+    min-height: 360px;
+  }
+
+  .action-button {
+    min-height: 105px;
+  }
+
+}
+
+/* =====================================================
+   SYLLABLES TO REVIEW
+===================================================== */
+
+.review {
+  width: 100%;
+  box-sizing: border-box;
+
+  margin: 10px 0 30px;
+  padding: 24px;
+
+  background: #fff7ed;
+  border: 2px solid #fed7aa;
+  border-radius: 28px;
+
+  text-align: left;
+
+  &__header {
+    display: flex;
+    align-items: center;
+
+    gap: 16px;
+
+    margin-bottom: 22px;
+
+    h2 {
+      margin: 0;
+
+      font-size: 23px;
+      line-height: 1.2;
+
+      color: #9a3412;
+    }
+
+    p {
+      margin: 5px 0 0;
+
+      font-size: 15px;
+      font-weight: 600;
+
+      color: #c2410c;
+      opacity: 0.8;
+    }
+  }
+
+  &__icon {
+    width: 58px;
+    height: 58px;
+
+    flex: 0 0 58px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    background: #ffffff;
+
+    border-radius: 18px;
+
+    font-size: 29px;
+
+    box-shadow:
+      0 4px 12px rgba(154, 52, 18, 0.08);
+  }
+
+  &__syllables {
+    display: grid;
+    grid-template-columns: repeat(
+      auto-fit,
+      minmax(120px, 1fr)
+    );
+
+    gap: 12px;
+  }
+}
+
+
+.review-card {
+  min-height: 100px;
+
+  display: flex;
+  flex-direction: column;
+
+  align-items: center;
+  justify-content: center;
+
+  padding: 12px;
+
+  box-sizing: border-box;
+
+  background: #ffffff;
+
+  border-radius: 20px;
+
+  box-shadow:
+    0 4px 12px rgba(154, 52, 18, 0.06);
+
+  strong {
+    font-size: 34px;
+    line-height: 1;
+
+    letter-spacing: 2px;
+
+    color: #9a3412;
+  }
+
+  span {
+    margin-top: 9px;
+
+    font-size: 14px;
+    font-weight: 700;
+
+    color: #c2410c;
+    opacity: 0.75;
+  }
+}
+
+
+/* =====================================================
+   PHONE
+===================================================== */
+
+@media (max-width: 600px) {
+
+  .game {
+    padding: 18px 16px;
+  }
+
+
+  .game-header {
+    grid-template-columns: 60px 1fr 60px;
+
+    &__title {
+
+      span {
+        font-size: 12px;
+      }
+
+      strong {
+        font-size: 21px;
+      }
+    }
+  }
+
+
+  .back-button {
+    width: 50px;
+    height: 50px;
+
+    border-radius: 16px;
+
+    font-size: 26px;
+  }
+
+
+  .score {
+    font-size: 17px;
+  }
+
+
+  .game-content {
+    margin-top: 30px;
+  }
+
+
+  .instruction {
+    font-size: 18px;
+  }
+
+
+  .reading-card {
+    min-height: 280px;
+
+    border-radius: 28px;
+  }
+
+
+  .syllable {
+    font-size: clamp(75px, 24vw, 110px);
+  }
+
+
+  .actions {
+    gap: 12px;
+  }
+
+
+  .action-button {
+    min-height: 82px;
+
+    border-radius: 22px;
+
+    font-size: 19px;
+
+    &__icon {
+      font-size: 26px;
+    }
+  }
+
+
+  /* Result */
+
+  .result {
+
+    &__emoji {
+      font-size: 65px;
+    }
+
+    h1 {
+      font-size: 30px;
+    }
+
+    > p {
+      font-size: 17px;
+    }
+  }
+
+
+  .result__score {
+    gap: 8px;
+
+    margin: 28px 0;
+
+    div {
+      padding: 18px 8px;
+
+      strong {
+        font-size: 27px;
+      }
+
+      span {
+        font-size: 13px;
+      }
+    }
+  }
+
+
+  .result-actions {
+    gap: 12px;
+
+    margin-top: 22px;
+  }
+
+
+  .result-button {
+    min-height: 90px;
+
+    padding: 14px 18px;
+
+    border-radius: 24px;
+
+    gap: 14px;
+
+    &__icon {
+      width: 56px;
+      height: 56px;
+
+      flex-basis: 56px;
+
+      border-radius: 17px;
+
+      font-size: 28px;
+    }
+
+    &__content {
+
+      strong {
+        font-size: 20px;
+      }
+
+      small {
+        font-size: 13px;
+      }
+    }
+
+    &__arrow {
+      font-size: 28px;
+    }
+  }
+
+}

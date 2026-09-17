@@ -1,0 +1,291 @@
+<div class="game">
+
+  <!-- HEADER -->
+  <header class="game-header">
+
+    <button
+      class="back-button"
+      routerLink="/"
+      aria-label="Torna alla home"
+    >
+      ←
+    </button>
+
+    <div class="game-header__title">
+      <span>Livello 1</span>
+      <strong>Sillabe</strong>
+    </div>
+
+    <div class="score">
+      ⭐ {{ correctAnswers() }}
+    </div>
+
+  </header>
+
+
+  <!-- CONTENT -->
+  <main class="game-content">
+
+    @if (!finished()) {
+
+      <!-- ISTRUZIONE -->
+      <div class="instruction">
+        Leggi la sillaba
+      </div>
+
+
+      <!-- SILLABA -->
+      <div class="reading-card">
+
+        <span class="syllable">
+          {{ currentSyllable() }}
+        </span>
+
+      </div>
+
+
+      <!-- PROGRESSO -->
+      <div class="progress">
+
+        <span class="progress__current">
+          {{ currentQuestion() }}
+        </span>
+
+        <span>/</span>
+
+        <span>
+          {{ totalQuestions }}
+        </span>
+
+      </div>
+
+
+      <!-- AZIONI -->
+      <div class="actions">
+
+        <button
+          class="action-button action-button--wrong"
+          (click)="answer(false)"
+        >
+          <span class="action-button__icon">
+            ✕
+          </span>
+
+          <span>
+            Errore
+          </span>
+        </button>
+
+
+        <button
+          class="action-button action-button--correct"
+          (click)="answer(true)"
+        >
+          <span class="action-button__icon">
+            ✓
+          </span>
+
+          <span>
+            Giusto
+          </span>
+        </button>
+
+      </div>
+
+    } @else {
+
+      <!-- ========================================= -->
+      <!-- RISULTATO -->
+      <!-- ========================================= -->
+
+      <div class="result">
+
+        <div class="result__emoji">
+          🎉
+        </div>
+
+
+        <h1>
+          Bravissima Alyza!
+        </h1>
+
+
+        <p>
+          Hai completato l'allenamento.
+        </p>
+
+
+        <!-- STATISTICHE -->
+        <div class="result__score">
+
+          <div>
+            <strong>
+              {{ correctAnswers() }}
+            </strong>
+
+            <span>
+              Giuste
+            </span>
+          </div>
+
+
+          <div>
+            <strong>
+              {{ wrongAnswers() }}
+            </strong>
+
+            <span>
+              Errori
+            </span>
+          </div>
+
+
+          <div>
+            <strong>
+              {{ accuracy() }}%
+            </strong>
+
+            <span>
+              Precisione
+            </span>
+          </div>
+
+        </div>
+
+
+        <!-- ========================================= -->
+        <!-- SILLABE DA ALLENARE -->
+        <!-- ========================================= -->
+
+        @if (errorList().length > 0) {
+
+          <div class="review">
+
+            <div class="review__header">
+
+              <span class="review__icon">
+                💪
+              </span>
+
+              <div>
+                <h2>
+                  Da allenare ancora
+                </h2>
+
+                <p>
+                  Nessun problema, riproviamo insieme!
+                </p>
+              </div>
+
+            </div>
+
+
+            <div class="review__syllables">
+
+              @for (item of errorList(); track item.syllable) {
+
+                <div class="review-card">
+
+                  <strong>
+                    {{ item.syllable }}
+                  </strong>
+
+                  <span>
+
+                    @if (item.count === 1) {
+
+                      1 errore
+
+                    } @else {
+
+                      {{ item.count }} errori
+
+                    }
+
+                  </span>
+
+                </div>
+
+              }
+
+            </div>
+
+          </div>
+
+        }
+
+
+        <!-- ========================================= -->
+        <!-- AZIONI FINALI -->
+        <!-- ========================================= -->
+
+        <div class="result-actions">
+
+          <button
+            class="result-button result-button--play"
+            (click)="restart()"
+          >
+
+            <span class="result-button__icon">
+              🔄
+            </span>
+
+
+            <span class="result-button__content">
+
+              <strong>
+                Gioca ancora
+              </strong>
+
+              <small>
+                Facciamo un'altra partita!
+              </small>
+
+            </span>
+
+
+            <span class="result-button__arrow">
+              →
+            </span>
+
+          </button>
+
+
+          <button
+            class="result-button result-button--home"
+            routerLink="/"
+          >
+
+            <span class="result-button__icon">
+              🏠
+            </span>
+
+
+            <span class="result-button__content">
+
+              <strong>
+                Torna alla Home
+              </strong>
+
+              <small>
+                Scegli un altro esercizio
+              </small>
+
+            </span>
+
+
+            <span class="result-button__arrow">
+              →
+            </span>
+
+          </button>
+
+        </div>
+
+      </div>
+
+    }
+
+  </main>
+
+</div>
