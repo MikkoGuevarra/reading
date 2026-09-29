@@ -27,6 +27,13 @@ export const routes: Routes = [
       import('./pages/sentences/sentences').then((m) => m.Sentences),
   },
   {
+    path: 'comprehension',
+    loadComponent: () =>
+      import('./pages/comprehension/comprehension').then(
+        (m) => m.Comprehension,
+      ),
+  },
+  {
     path: '**',
     redirectTo: '',
   },

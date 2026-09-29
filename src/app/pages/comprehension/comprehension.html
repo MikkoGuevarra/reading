@@ -1,0 +1,398 @@
+<div class="comprehension-page">
+  <div class="comprehension-container">
+
+    <header class="page-header">
+      <a
+        routerLink="/"
+        class="back-button"
+        aria-label="Torna alla home"
+      >
+        ←
+      </a>
+
+      <div class="page-header__content">
+        <span>Livello 4</span>
+        <h1>Comprensione</h1>
+      </div>
+
+      @if (!finished()) {
+        <div class="score">
+          ⭐ {{ correctAnswers() }}
+        </div>
+      }
+    </header>
+
+
+    @if (!finished()) {
+
+      <!-- ========================================= -->
+      <!-- FASE 1: LETTURA -->
+      <!-- ========================================= -->
+
+      @if (readingStory()) {
+
+        <section class="intro">
+          <span class="intro__icon">📖</span>
+
+          <div>
+            <strong>Prima leggi la storia</strong>
+            <p>
+              Leggila con calma. Dopo arriveranno
+              alcune domande.
+            </p>
+          </div>
+        </section>
+
+
+        <section class="story-card">
+          <span class="story-card__label">
+            Storia
+          </span>
+
+          <h2>
+            {{ currentStory().title }}
+          </h2>
+
+          <p>
+            {{ currentStory().text }}
+          </p>
+        </section>
+
+
+        <button
+          type="button"
+          class="primary-button"
+          (click)="finishReading()"
+        >
+          <span class="primary-button__icon">
+            👍
+          </span>
+
+          <span class="primary-button__content">
+            <strong>
+              Ho finito di leggere
+            </strong>
+
+            <small>
+              Iniziamo con le domande
+            </small>
+          </span>
+
+          <span class="primary-button__arrow">
+            →
+          </span>
+        </button>
+
+      } @else {
+
+        <!-- ========================================= -->
+        <!-- FASE 2: DOMANDE -->
+        <!-- ========================================= -->
+
+        <section class="progress-section">
+
+          <div class="progress-info">
+            <span>
+              Domanda {{ questionNumber() }}
+              di {{ totalQuestions() }}
+            </span>
+
+            <span>
+              {{ correctAnswers() }} giuste
+            </span>
+          </div>
+
+          <div class="progress-track">
+            <div
+              class="progress-bar"
+              [style.width.%]="progress()"
+            ></div>
+          </div>
+
+        </section>
+
+
+        <!-- Possibilità di rileggere -->
+
+        <button
+          type="button"
+          class="story-toggle"
+          (click)="toggleStory()"
+        >
+          @if (storyVisible()) {
+            <span>🙈 Nascondi la storia</span>
+          } @else {
+            <span>📖 Rileggi la storia</span>
+          }
+        </button>
+
+
+        @if (storyVisible()) {
+
+          <section class="story-card story-card--small">
+
+            <h2>
+              {{ currentStory().title }}
+            </h2>
+
+            <p>
+              {{ currentStory().text }}
+            </p>
+
+          </section>
+
+        }
+
+
+        <!-- DOMANDA -->
+
+        <section class="question-card">
+
+          <span class="question-card__number">
+            Domanda {{ questionNumber() }}
+          </span>
+
+          <h2>
+            {{ currentQuestion().question }}
+          </h2>
+
+        </section>
+
+
+        @if (!showAnswer()) {
+
+          <!-- SCRITTURA -->
+
+          <section class="write-card">
+
+            <div class="write-card__icon">
+              ✏️
+            </div>
+
+            <div>
+              <strong>
+                Scrivi la risposta sul quaderno
+              </strong>
+
+              <p>
+                Prova a rispondere con una frase completa.
+              </p>
+            </div>
+
+          </section>
+
+
+          <button
+            type="button"
+            class="primary-button"
+            (click)="revealAnswer()"
+          >
+            <span class="primary-button__icon">
+              👀
+            </span>
+
+            <span class="primary-button__content">
+              <strong>
+                Mostra la risposta
+              </strong>
+
+              <small>
+                Solo dopo aver scritto
+              </small>
+            </span>
+
+            <span class="primary-button__arrow">
+              →
+            </span>
+          </button>
+
+        } @else {
+
+          <!-- RISPOSTA -->
+
+          <section class="answer-card">
+
+            <div class="answer-card__header">
+              <span>💡</span>
+              <strong>Una possibile risposta</strong>
+            </div>
+
+            <p>
+              {{ currentQuestion().answer }}
+            </p>
+
+            <small>
+              Non deve essere identica parola per parola:
+              deve avere lo stesso significato.
+            </small>
+
+          </section>
+
+
+          <section class="evaluation">
+
+            <h3>
+              Com'è andata?
+            </h3>
+
+            <div class="evaluation__actions">
+
+              <button
+                type="button"
+                class="evaluation-button evaluation-button--review"
+                (click)="answer(false)"
+              >
+                <span>↻</span>
+
+                <div>
+                  <strong>Da rivedere</strong>
+                  <small>Riproveremo</small>
+                </div>
+              </button>
+
+
+              <button
+                type="button"
+                class="evaluation-button evaluation-button--correct"
+                (click)="answer(true)"
+              >
+                <span>✓</span>
+
+                <div>
+                  <strong>Giusto!</strong>
+                  <small>Ha capito</small>
+                </div>
+              </button>
+
+            </div>
+
+          </section>
+
+        }
+
+      }
+
+    } @else {
+
+      <!-- ========================================= -->
+      <!-- RISULTATO -->
+      <!-- ========================================= -->
+
+      <section class="result">
+
+        <div class="result__emoji">
+          @if (accuracy() === 100) {
+            🌟
+          } @else if (accuracy() >= 67) {
+            🎉
+          } @else {
+            💪
+          }
+        </div>
+
+        <span class="result__level">
+          Livello 4
+        </span>
+
+        <h1>
+          Bravissima Alyza!
+        </h1>
+
+        <p class="result__story">
+          {{ currentStory().title }}
+        </p>
+
+
+        <div class="result__score">
+          <strong>
+            {{ correctAnswers() }}/{{ totalQuestions() }}
+          </strong>
+
+          <span>
+            risposte corrette
+          </span>
+        </div>
+
+
+        <div class="result__stats">
+
+          <div class="result-stat result-stat--correct">
+            <span>✓</span>
+
+            <strong>
+              {{ correctAnswers() }}
+            </strong>
+
+            <small>Giuste</small>
+          </div>
+
+
+          <div class="result-stat result-stat--review">
+            <span>↻</span>
+
+            <strong>
+              {{ reviewAnswers() }}
+            </strong>
+
+            <small>Da rivedere</small>
+          </div>
+
+        </div>
+
+
+        <div class="result-actions">
+
+          <button
+            type="button"
+            class="result-button result-button--next"
+            (click)="nextStory()"
+          >
+            <span>📖</span>
+
+            <div>
+              <strong>Nuova storia</strong>
+              <small>Continuiamo ad allenarci</small>
+            </div>
+
+            <b>→</b>
+          </button>
+
+
+          <button
+            type="button"
+            class="result-button result-button--retry"
+            (click)="restart()"
+          >
+            <span>🔄</span>
+
+            <div>
+              <strong>Riprova questa storia</strong>
+              <small>Leggiamola ancora</small>
+            </div>
+
+            <b>→</b>
+          </button>
+
+
+          <a
+            routerLink="/"
+            class="result-button result-button--home"
+          >
+            <span>🏠</span>
+
+            <div>
+              <strong>Torna alla Home</strong>
+              <small>Scegli un altro esercizio</small>
+            </div>
+
+            <b>→</b>
+          </a>
+
+        </div>
+
+      </section>
+
+    }
+
+  </div>
+</div>
